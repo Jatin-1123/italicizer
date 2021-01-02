@@ -22,6 +22,14 @@ module.exports = class Italicize extends Plugin {
     const getSetting = (setting, defaultValue) => this.settings.get(setting, defaultValue);
 
     function italicizeText(words) {
+      if (words.match(/^\_(?!\_).+\_(?!\_)$/)) {
+        words = words.replace(/^_|_$/g, "")
+      }
+      if (words.match(/^\*(?!\*).+\*(?!\*)$/)) {
+        words = words.replace(/^\*|\*$/g, "\*")
+      }
+      
+
       var output = `_${words}_`;
 
       return output
