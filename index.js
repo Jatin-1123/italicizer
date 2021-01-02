@@ -1,9 +1,8 @@
 const { Plugin } = require('powercord/entities');
-const { getModule, React, messages, channels } = require('powercord/webpack');
-const { inject, uninject} = require('powercord/injector');
+const { getModule, React } = require('powercord/webpack');
+const { inject, uninject } = require('powercord/injector');
 const { findInReactTree } = require('powercord/util');
 
-const Settings = require('./components/Settings');
 const Button = require('./components/Button');
 let italicizerAutoToggle = false;
 
@@ -12,21 +11,17 @@ module.exports = class Italicize extends Plugin {
     this.addButton();
     powercord.api.settings.registerSettings(this.entityID, {
       category: this.entityID,
-      label: 'Italicizer',
-      render: (props) => React.createElement(Settings, {
-        main:this,
-        ...props
-      })
+      label: 'Italicizer'
     }); 
 
     const getSetting = (setting, defaultValue) => this.settings.get(setting, defaultValue);
 
     function italicizeText(words) {
       if (words.match(/^\_(?!\_).+\_(?!\_)$/)) {
-        words = words.replace(/^_|_$/g, "")
+        words = words.replace(/^_|_$/g, "");
       }
       if (words.match(/^\*(?!\*).+\*(?!\*)$/)) {
-        words = words.replace(/^\*|\*$/g, "\*")
+        words = words.replace(/^\*|\*$/g, "\*");
       }
       
 
